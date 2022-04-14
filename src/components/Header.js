@@ -43,6 +43,7 @@ const MobileMenuIcon = styled.div`
   width: 25px;
   min-width: 25px;
   padding: 5px;
+  cursor: pointer;
   > div {
     height: 3px;
     background: black;
