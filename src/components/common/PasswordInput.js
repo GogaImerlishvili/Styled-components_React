@@ -33,8 +33,9 @@ const ToggleButton = styled.div`
   user-select: none;
   color: black;
 `;
+
 export function PasswordInput(props) {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
 
   return (
     <>
@@ -44,7 +45,6 @@ export function PasswordInput(props) {
           {showPassword ? "Hide" : "Show"}
         </ToggleButton>
       </PasswordInputWrapper>
-
       <div>{showPassword ? props.value : ""}</div>
     </>
   );
