@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PageLayout from "../PageLayout";
-import { Input } from "../common/Input";
-import { PasswordInput, Button, Spinner } from "../common";
-
+import { PageLayout, Input, PasswordInput, Button, Spinner } from "../common";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -14,21 +11,26 @@ const Form = styled.form`
   box-sizing: border-box;
   color: black;
   border-radius: 4px;
-
   .alt-text {
     text-align: center;
     margin: 10px 0;
+  }
+  > ${Button}:first-of-type {
+    margin-top: 40px;
+  }
+  > ${Input} {
+    margin-top: 20px;
   }
 `;
 
 let timeout;
 
-export const Login = () => {
+export default function Login() {
   const [formFields, setFormFields] = useState({ username: "", password: "" });
   const [loading, setLoading] = useState(false);
 
   function handleInputChange(e) {
-    e.preventDefault();
+    e.persist();
     setFormFields((s) => ({
       ...s,
       [e.target.name]: e.target.value,
@@ -59,17 +61,18 @@ export const Login = () => {
           <Spinner />
         ) : (
           <>
+            <span>Login if you have an account</span>
             <Input
-              name="username"
-              placeholder="Username"
               value={formFields.username}
               onChange={handleInputChange}
+              name="username"
               type="text"
+              placeholder="Username"
             />
             <PasswordInput
-              name="password"
               value={formFields.password}
               onChange={handleInputChange}
+              name="password"
             />
           </>
         )}
@@ -78,7 +81,7 @@ export const Login = () => {
         </Button>
         {!loading && (
           <>
-            <div className="alt-text"> or</div>
+            <div className="alt-text">or</div>
             <Button secondary type="button">
               Register
             </Button>
@@ -87,6 +90,4 @@ export const Login = () => {
       </Form>
     </PageLayout>
   );
-};
-
-export default Login;
+}
