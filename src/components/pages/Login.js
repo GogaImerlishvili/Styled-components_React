@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import PageLayout from "../PageLayout";
+import { Input } from "../common/Input";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -13,11 +14,36 @@ const Form = styled.form`
   border-radius: 4px;
 `;
 
-const Login = () => {
+export const Login = () => {
+  const [formFields, setFormFields] = useState({ username: "", password: "" });
+
+  function handleInputChange(e) {
+    e.preventDefault();
+    setFormFields((s) => ({
+      ...s,
+      [e.target.name]: e.target.value,
+    }));
+  }
+
   return (
     <PageLayout>
       <h1>Login</h1>
-      <Form></Form>
+      <Form>
+        <Input
+          name="username"
+          placeholder="Username"
+          value={formFields.username}
+          onChange={handleInputChange}
+          type="text"
+        />
+        <Input
+          name="password"
+          placeholder="Password"
+          value={formFields.password}
+          onChange={handleInputChange}
+          type="password"
+        />
+      </Form>
     </PageLayout>
   );
 };
